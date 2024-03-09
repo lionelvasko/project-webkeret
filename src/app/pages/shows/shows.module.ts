@@ -9,12 +9,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AdressComponent } from './adress/adress.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     ShowsComponent,
-    ShowsDashboardComponent
+    ShowsDashboardComponent,
+    AdressComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +30,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    MatTabsModule
   ]
 })
 export class ShowsModule { }
