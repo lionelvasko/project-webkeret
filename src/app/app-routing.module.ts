@@ -10,8 +10,7 @@ const routes: Routes = [
   {path: 'not-found', loadChildren:() => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)},
   { path: 'login/forgot-pswd', loadChildren: () => import('./pages/login/forgot-pswd/forgot-pswd.module').then(m => m.ForgotPswdModule) },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/not-found', pathMatch: 'full'},
-  
+  {path: '**', redirectTo: '/not-found', pathMatch: 'full'}
 ];
 
 @NgModule({
