@@ -24,9 +24,6 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   constructor(private authService: AuthService, private router: Router){}
 
-  ho(){
-    this.router.navigateByUrl('/home');
-  }
 
   async login(event: Event){
     event.preventDefault();

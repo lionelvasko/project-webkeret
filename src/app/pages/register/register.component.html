@@ -1,16 +1,16 @@
-<form>
+<form (submit)="register($event)">
     <h3>Register Here</h3>
 
     <label for="emaik">Email</label>
-    <input type="text" placeholder="Email" id="email">
+    <input type="text" placeholder="Email" id="email" [formControl]="email">
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
+    <input type="password" placeholder="Password" id="password" [formControl]="password">
 
     <label for="password-again">Password Again</label>
-    <input type="password" placeholder="Password Again" id="password-again">
+    <input type="password" placeholder="Password Again" id="password-again" [formControl]="confirmPassword">
 
-    <button>Register</button>
+    <button type="submit">Register</button>
     <div class="social">
         <div class="fb" routerLink="/login" style="cursor: pointer;"><i class="fab"></i>Login</div>
       <div class="fb" (click)="back()" style="cursor: pointer;"><i class="fab"></i>Back</div>
