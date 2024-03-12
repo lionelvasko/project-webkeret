@@ -17,19 +17,19 @@ export class LoginComponent implements OnInit, OnDestroy{
   loadingSubscription ?: Subscription;
   loadingObservation?: Observable<boolean>;
 
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnDestroy(): void {}
+  ngOnInit(): void {}
 
   loading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router){}
 
+  ho(){
+    this.router.navigateByUrl('/home');
+  }
 
-  async login(){
+  async login(event: Event){
+    event.preventDefault();
 
     const emailValue = this.email.value || '';
     const passwordValue = this.password.value || '';

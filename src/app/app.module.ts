@@ -15,6 +15,8 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())

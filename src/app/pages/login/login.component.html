@@ -1,4 +1,4 @@
-<form>
+<form (submit)="login($event)">
     <h3>Login Here</h3>
 
     <label for="username">Username</label>
@@ -7,7 +7,7 @@
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password" [formControl]="password">
 
-    <button (click)="login()" >Log In</button>
+    <button type="submit" >Log In</button>
     <div class="social">
         <div class="fb" routerLink="/register" style="cursor: pointer;"><i class="fab"></i>Register</div>
       <div class="fb" routerLink="/login/forgot-pswd" style="cursor: pointer;"><i class="fab"></i>Forgot password</div>
