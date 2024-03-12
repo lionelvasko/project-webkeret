@@ -2,18 +2,10 @@
   "hosting": [
     {
       "target": "project",
-      "public": "dist/project/browser",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
+      "source": ".",
+      "frameworksBackend": {
+        "region": "europe-west1"
+      }
     },
     {
       "target": "project",
