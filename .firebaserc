@@ -1,4 +1,13 @@
 {
+  "targets": {
+    "cinema-web-mobil-4d142": {
+      "hosting": {
+        "project": [
+          "cinema-web-mobil-4d142"
+        ]
+      }
+    }
+  },
   "projects": {
     "default": "cinema-web-mobil-4d142"
   }

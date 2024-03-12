@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Project": {
+    "project": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -29,6 +29,11 @@
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "undici",
+              "@grpc/grpc-js",
+              "@grpc/proto-loader"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -75,10 +80,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Project:build:production"
+              "buildTarget": "project:build:production"
             },
             "development": {
-              "buildTarget": "Project:build:development"
+              "buildTarget": "project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "Project:build"
+            "buildTarget": "project:build"
           }
         },
         "test": {
@@ -108,6 +113,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "project:build:production",
+              "serveTarget": "project:serve:production"
+            },
+            "development": {
+              "buildTarget": "project:build:development",
+              "serveTarget": "project:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
