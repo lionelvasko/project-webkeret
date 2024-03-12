@@ -2,12 +2,12 @@
     <h3>Login Here</h3>
 
     <label for="username">Username</label>
-    <input type="text" placeholder="Email or Phone" id="username">
+    <input type="text" placeholder="Email or Phone" id="username" [formControl]="email">
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
+    <input type="password" placeholder="Password" id="password" [formControl]="password">
 
-    <button>Log In</button>
+    <button (click)="login()" >Log In</button>
     <div class="social">
         <div class="fb" routerLink="/register" style="cursor: pointer;"><i class="fab"></i>Register</div>
       <div class="fb" routerLink="/login/forgot-pswd" style="cursor: pointer;"><i class="fab"></i>Forgot password</div>
