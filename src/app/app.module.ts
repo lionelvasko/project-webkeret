@@ -17,6 +17,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
   declarations: [

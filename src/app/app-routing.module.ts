@@ -8,7 +8,8 @@ const routes: Routes = [
   {path: 'shows', loadChildren:() => import('./pages/shows/shows.module').then(m => m.ShowsModule)},
   {path: 'profile', loadChildren:() => import('./pages/profile/profile.module').then(m => m.ProfileModule)},
   {path: 'not-found', loadChildren:() => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)},
-  { path: 'login/forgot-pswd', loadChildren: () => import('./pages/login/forgot-pswd/forgot-pswd.module').then(m => m.ForgotPswdModule) },
+  {path: 'login/forgot-pswd', loadChildren: () => import('./pages/login/forgot-pswd/forgot-pswd.module').then(m => m.ForgotPswdModule) },
+  {path: 'logout', loadChildren: () => import('./pages/logout/logout.module').then(m => m.LogoutModule)},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/not-found', pathMatch: 'full'}
 ];
