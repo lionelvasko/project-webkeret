@@ -29,10 +29,10 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
+    provideStorage(() => getStorage())
   ],
   providers: [
     provideClientHydration(),
