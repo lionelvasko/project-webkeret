@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "project",
-      "source": ".",
+      "public": "dist/project",
       "frameworksBackend": {
         "region": "europe-west1"
       }
