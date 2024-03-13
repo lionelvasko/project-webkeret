@@ -38,9 +38,22 @@ export class RegisterComponent implements OnInit, OnDestroy{
     const confirmPasswordValue = this.password.value || '';
 
     if (passwordValue !== confirmPasswordValue) {
-      console.error('Passwords do not match');
+      alert('A két jelszó nem egyezik meg!');
       return;
     }
+
+    try {
+      const emailExists = await this.authService.checkEmailExists(emailValue);
+      if (emailExists) {
+        alert('Ez az email cím már regisztrálva van!');
+        return;
+      }
+    }
+    catch(error) {
+      console.error(error);
+      return;
+    }
+
       this.authService.register(emailValue, passwordValue).then(cred => {
         console.log(cred);
         this.router.navigateByUrl('/home');
