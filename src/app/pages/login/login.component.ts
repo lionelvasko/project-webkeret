@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy{
       this.router.navigateByUrl('/home');
       this.loading = false;
     }).catch(error => {
-      console.error(error);
+      alert('A felhasználónév vagy jelszó nem megfelelő!');
       this.loading = false;
     });
 
