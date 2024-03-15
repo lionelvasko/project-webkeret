@@ -5,6 +5,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { TicketsComponent } from './tickets/tickets.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { TicketsComponent } from './tickets/tickets.component';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    ReactiveFormsModule
   ]
 })
 export class ProfileModule { }
