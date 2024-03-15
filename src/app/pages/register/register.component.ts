@@ -5,6 +5,8 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../../shared/services/storage.service';
+import { getAuth } from "firebase/auth";
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +27,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
 
   loading: boolean = false;
 
+
   constructor(private authService: AuthService, private router: Router, private _location: Location, private storage: StorageService){}
 
   back() {
@@ -43,7 +46,9 @@ export class RegisterComponent implements OnInit, OnDestroy{
       return;
     }
       this.authService.register(emailValue, passwordValue).then(cred => {
-        this.storage.createuser(emailValue, passwordValue).then(cred2 =>{
+        let auth = getAuth();
+        let user = auth.currentUser;    
+        this.storage.createUser(emailValue, passwordValue, user?.uid ?? '').then(cred2 =>{
           console.log(cred2);
         });
         console.log(cred);
