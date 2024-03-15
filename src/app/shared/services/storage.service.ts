@@ -19,21 +19,28 @@ export class StorageService {
   async getUserData(documentId: string) {
     const docSnap = await getDoc(doc(this.firestore, 'users', documentId));
     if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data());
-      return docSnap.data();
+      console.log('Document data:', docSnap.data() as string[]);
+      return docSnap.data() as string[];
     } else {
       console.log('No such document!');
       return null;
     }
   }
 
-async updateCurrentUser(userID: string ,name: string, email: string, password: string, phone: string, address: string) {
-    await setDoc( doc( this.firestore, 'users', userID), {
-      name: name,
-      email: email,
-      password: password,
-      phone: phone,
-      address: address
-    });
+async updateCurrentUser(userID: string ,name: string, email: string, phone: string, address: string) {
+    const docRef = doc(this.firestore, 'users', userID);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const userData = docSnap.data();
+      const updatedData = {
+      name: name !== '' ? name : userData['name'],
+      email: email !== '' ? email : userData['email'],
+      phone: phone !== '' ? phone : userData['phone'],
+      address: address !== '' ? address : userData['address']
+      };
+      await setDoc(docRef, updatedData);
+    } else {
+      alert('No such document!');
+    }
   }
 }

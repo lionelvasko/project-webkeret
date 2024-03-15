@@ -6,7 +6,6 @@ import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../../shared/services/storage.service';
 import { getAuth } from "firebase/auth";
-import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
