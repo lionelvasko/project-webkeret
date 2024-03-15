@@ -1,4 +1,27 @@
 <mat-tab-group>
-  <mat-tab label="Profile"><app-profile-thing></app-profile-thing></mat-tab>
+  <mat-tab label="Profile">
+
+    <div class="profile-card">
+      <form class="body" >
+          <label class="profile-card__label">Name</label>
+          <input type="text" class="profile-card__input">
+  
+          <label class="profile-card__label">Email</label>
+          <input type="text" class="profile-card__input">
+  
+          <label class="profile-card__label">Password</label>
+          <input type="password" class="profile-card__input">
+  
+          <label class="profile-card__label">Phone</label>
+          <input type="text" class="profile-card__input">
+  
+          <label class="profile-card__label">Address</label>
+          <input type="text" class="profile-card__input">
+
+          <button class="profile-card__button">Save</button>
+      </form>
+  </div>
+
+  </mat-tab>
   <mat-tab label="Tickets"><app-tickets></app-tickets></mat-tab>
 </mat-tab-group>
