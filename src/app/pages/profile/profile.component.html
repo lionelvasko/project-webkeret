@@ -4,16 +4,16 @@
     <div class="profile-card">
       <form class="body" (submit)="change($event)">
           <label class="profile-card__label">Name</label>
-          <input type="text" class="profile-card__input" [formControl]="name">
+          <input type="text" class="profile-card__input" [value]="name | async">
   
           <label class="profile-card__label">Email</label>
-          <input type="email" class="profile-card__input" [formControl]="email">
+          <input type="email" class="profile-card__input" [value]="email | async">
   
           <label class="profile-card__label">Phone</label>
-          <input type="tel" class="profile-card__input" [formControl]="phone">
+          <input type="tel" class="profile-card__input" [value]="phone | async">
   
           <label class="profile-card__label">Address</label>
-          <input type="text" class="profile-card__input" [formControl]="address">
+          <input type="text" class="profile-card__input" [value]="address | async">
           <div class="buttons">
             <button class="profile-card__button">Save</button>
             <button class="profile-card__button">Delete</button>
