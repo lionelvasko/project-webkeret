@@ -3,7 +3,8 @@ import { Location } from '@angular/common';
 import { FormControl} from '@angular/forms'
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
 
   loading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private _location: Location){}
+  constructor(private authService: AuthService, private router: Router, private _location: Location, private storage: StorageService){}
 
   back() {
     this._location.back();
@@ -41,26 +42,31 @@ export class RegisterComponent implements OnInit, OnDestroy{
       alert('A két jelszó nem egyezik meg!');
       return;
     }
-
-    try {
-      const emailExists = await this.authService.checkEmailExists(emailValue);
-      if (emailExists) {
-        alert('Ez az email cím már regisztrálva van!');
-        return;
-      }
-    }
-    catch(error) {
-      console.error(error);
-      return;
-    }
-
       this.authService.register(emailValue, passwordValue).then(cred => {
+        this.storage.createuser(emailValue, passwordValue).then(cred2 =>{
+          console.log(cred2);
+        });
         console.log(cred);
         this.router.navigateByUrl('/home');
         this.loading = false;
       }).catch(error => {
-        console.error(error);
-        this.loading = false;
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            alert(`Email address already in use.`)
+            break;
+          case 'auth/invalid-email':
+            console.log(`Email address ${emailValue} is invalid.`);
+            break;
+          case 'auth/operation-not-allowed':
+            alert('Error during sign up.');
+            break;
+          case 'auth/weak-password':
+            alert ('Password is not strong enough. Add additional characters including special characters and numbers.');
+            break;
+          default:
+            console.log(error.message);
+            break;
+        }
       });
 
   }

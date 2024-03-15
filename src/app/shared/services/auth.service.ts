@@ -23,8 +23,4 @@ export class AuthService {
   logout() {
     return this.auth.signOut();
   }
-
-  checkEmailExists(email: string) {
-    return this.auth.fetchSignInMethodsForEmail(email);
-  }
 }
