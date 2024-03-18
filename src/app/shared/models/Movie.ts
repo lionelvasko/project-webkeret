@@ -1,6 +1,6 @@
 export interface Movie{
     name: string;
     duration: number;
-    premier: Date;
+    release_date: Date;
     picture: string;
 }
