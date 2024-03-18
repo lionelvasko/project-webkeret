@@ -2,7 +2,10 @@
   <h1 class="mat-h1">Dashboard</h1>
   <mat-grid-list cols="5" rowHeight="350px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card" style="background-image: url('{{card.picture}}'); background-repeat: no-repeat; background-position: center; background-size: 100% 110%;">
+      <mat-card class="dashboard-card" style="background-image: url('{{card.picture}}'); background-size: cover; width: 100%; background-position: center;">
+        <mat-card-content>
+          {{card.title}}
+        </mat-card-content>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

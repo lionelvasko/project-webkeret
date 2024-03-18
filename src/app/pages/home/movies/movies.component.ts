@@ -25,11 +25,11 @@ export class MoviesComponent {
         map(({ matches }) => {
           if (matches) {
             return this.movies.map((movie, index) => {
-              return {cols: 5, rows: 1, picture: movie.picture, title: movie.name, duration: movie.duration, ifShow: true, premier: movie.release_date};
+              return {cols: 5, rows: 1, picture: movie.picture, title: movie.name};
             });
           }
           return this.movies.map((movie, index) => {
-            return {cols: 1, rows: 1, picture: movie.picture};
+            return {cols: 1, rows: 1, picture: movie.picture,title: movie.name};
           });
         })
       );

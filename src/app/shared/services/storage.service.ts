@@ -9,10 +9,13 @@ export class StorageService {
 
   constructor(private firestore: Firestore) { }
 
-  async createUser(email: string, password: string, userID: string) {
+  async createUser(email: string, password: string, name: string, phone: string, address: string , userID: string) {
     await setDoc( doc( this.firestore, 'users', userID), {
       email: email,
       password: password,
+      name: name,
+      phone: phone,
+      address: address
     });
   }
 

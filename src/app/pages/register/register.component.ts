@@ -17,6 +17,9 @@ export class RegisterComponent implements OnInit, OnDestroy{
   email = new FormControl('');
   password = new FormControl('');
   confirmPassword = new FormControl('');
+  name = new FormControl('');
+  phone = new FormControl('');
+  address = new FormControl('');
 
   loadingSubscription ?: Subscription;
   loadingObservation?: Observable<boolean>;
@@ -39,6 +42,9 @@ export class RegisterComponent implements OnInit, OnDestroy{
     const emailValue = this.email.value || '';
     const passwordValue = this.password.value || '';
     const confirmPasswordValue = this.password.value || '';
+    const nameValue = this.name.value || '';
+    const phoneValue = this.phone.value || '';
+    const addressValue = this.address.value || '';
 
     if (passwordValue !== confirmPasswordValue) {
       alert('A két jelszó nem egyezik meg!');
@@ -47,10 +53,9 @@ export class RegisterComponent implements OnInit, OnDestroy{
       this.authService.register(emailValue, passwordValue).then(cred => {
         let auth = getAuth();
         let user = auth.currentUser;    
-        this.storage.createUser(emailValue, passwordValue, user?.uid ?? '').then(cred2 =>{
+        this.storage.createUser(emailValue, passwordValue, nameValue, phoneValue, addressValue, user?.uid ?? '').then(cred2 =>{
           console.log(cred2);
         });
-        console.log(cred);
         this.router.navigateByUrl('/home');
         this.loading = false;
       }).catch(error => {
