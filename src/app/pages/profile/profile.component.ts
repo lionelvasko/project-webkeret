@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { StorageService } from '../../shared/services/storage.service';
 import { getAuth } from "firebase/auth";
 import { BehaviorSubject } from 'rxjs';
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
   auth = getAuth();
 
 
-  constructor(private storageService: StorageService, private authService: AuthService) {
+  constructor(private storageService: StorageService, private authService: AuthService, private router: Router) {
     this.currentuser = this.auth.currentUser;
   }
 
@@ -41,10 +41,12 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   delete() {
-    this.authService.deleteUser();
     if (this.currentuser?.uid) {
-      this.storageService.deleteUser(this.currentuser.uid);
+      this.storageService.deleteUser(this.currentuser.uid).then(() => {
+        this.authService.deleteUser();
+      });
     }
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {
