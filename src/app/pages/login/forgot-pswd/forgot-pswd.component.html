@@ -1,8 +1,8 @@
-<form>
+<form (submit)="send($event)">
     <h3>Reset password</h3>
 
     <label for="username">Email</label>
-    <input type="text" placeholder="Email or Phone" id="username">
+    <input type="email" placeholder="Email" [formControl]="email">
 
     <button>Submit</button>
     <div class="social">

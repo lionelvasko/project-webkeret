@@ -19,6 +19,7 @@ export class AuthGuard implements CanActivate {
         return true;
       } else {
         // Redirect to login page
+        alert('You need to be logged in to access this page');
         return this.router.createUrlTree(['/login']);
       }
     }));

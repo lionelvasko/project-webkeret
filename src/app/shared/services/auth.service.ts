@@ -32,4 +32,7 @@ export class AuthService {
       user?.delete();
     });
   }
+  resetPassword(email: string) {
+    return this.auth.sendPasswordResetEmail(email);
+  }
 }
