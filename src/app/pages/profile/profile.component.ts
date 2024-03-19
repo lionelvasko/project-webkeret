@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
       });
     }
     this.router.navigate(['/']);
+    //TODO: Hibát dob a console a böngészőben
   }
 
   ngOnDestroy(): void {
