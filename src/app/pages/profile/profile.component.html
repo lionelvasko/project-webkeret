@@ -16,7 +16,7 @@
           <input type="text" class="profile-card__input" [value]="address | async">
           <div class="buttons">
             <button class="profile-card__button">Save</button>
-            <button class="profile-card__button">Delete</button>
+            <button class="profile-card__button" (click)="delete()">Delete</button>
           </div>
           
       </form>

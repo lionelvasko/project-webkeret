@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StorageService } from '../../shared/services/storage.service';
 import { getAuth } from "firebase/auth";
 import { BehaviorSubject } from 'rxjs';
-import { Subscription } from 'rxjs';
+import { AuthService } from '../../shared/services/auth.service';
 
 
 @Component({
@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileComponent implements OnInit, OnDestroy{
 
-
   name = new BehaviorSubject<string>('');
   email = new BehaviorSubject<string>('');
   phone = new BehaviorSubject<string>('');
@@ -22,9 +21,11 @@ export class ProfileComponent implements OnInit, OnDestroy{
   currentuser;
   auth = getAuth();
 
-  constructor(private storageService: StorageService) {
+
+  constructor(private storageService: StorageService, private authService: AuthService) {
     this.currentuser = this.auth.currentUser;
   }
+
   ngOnInit(): void {
     this.currentuser = this.auth.currentUser;
     if (this.currentuser?.uid) {
@@ -38,6 +39,14 @@ export class ProfileComponent implements OnInit, OnDestroy{
     });
   }
   }
+
+  delete() {
+    this.authService.deleteUser();
+    if (this.currentuser?.uid) {
+      this.storageService.deleteUser(this.currentuser.uid);
+    }
+  }
+
   ngOnDestroy(): void {
     this.name.complete();
     this.email.complete();

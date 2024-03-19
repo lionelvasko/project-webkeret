@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, doc, getDoc} from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, deleteDoc} from '@angular/fire/firestore';
 import { setDoc } from 'firebase/firestore';
 
 @Injectable({
@@ -17,6 +17,11 @@ export class StorageService {
       phone: phone,
       address: address
     });
+  }
+
+  async deleteUser(userID: string) {
+    console.log('Deleting user with ID: ', userID);
+    await deleteDoc(doc(this.firestore, 'users', userID));
   }
 
   async getUserData(documentId: string) {
