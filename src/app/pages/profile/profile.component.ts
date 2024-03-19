@@ -4,6 +4,7 @@ import { StorageService } from '../../shared/services/storage.service';
 import { getAuth } from "firebase/auth";
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class ProfileComponent implements OnInit, OnDestroy{
   email = new BehaviorSubject<string>('');
   phone = new BehaviorSubject<string>('');
   address = new BehaviorSubject<string>('');
+
+
 
   currentuser;
   auth = getAuth();
@@ -47,7 +50,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
       });
     }
     this.router.navigate(['/']);
-    //TODO: Hibát dob a console a böngészőben
   }
 
   ngOnDestroy(): void {
@@ -57,16 +59,21 @@ export class ProfileComponent implements OnInit, OnDestroy{
     this.address.complete();
   }
 
+  fname = new FormControl('')
+  femail = new FormControl('')
+  fphone = new FormControl('')
+  faddress = new FormControl('')
+
 
   async change(event: Event) {
     event.preventDefault();
     if (this.currentuser?.uid) {
       this.storageService.updateCurrentUser(
         this.currentuser.uid,
-        this.name.value,
-        this.email.value,
-        this.phone.value,
-        this.address.value
+        this.fname.value ?? '',
+        this.femail.value ?? '',
+        this.fphone.value ?? '',
+        this.faddress.value ?? ''
       );
     }
   }
