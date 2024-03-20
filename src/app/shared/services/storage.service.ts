@@ -27,7 +27,6 @@ export class StorageService {
   async getUserData(documentId: string) {
     const docSnap = await getDoc(doc(this.firestore, 'users', documentId));
     if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data() as string[]);
       return docSnap.data() as string[];
     } else {
       console.log('No such document!');
@@ -47,8 +46,7 @@ async updateCurrentUser(userID: string ,name: string, email: string, phone: stri
       address: address !== '' ? address : userData['address']
       };
       await setDoc(docRef, updatedData);
-    } else {
-      alert('No such document!');
     }
   }
+
 }

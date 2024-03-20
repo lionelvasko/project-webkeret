@@ -20,7 +20,5 @@ export class MoviesService {
     return this.afs.collection<Movie>(this.collectionName).valueChanges();
   }
 
-  loadMovie(id: string): Observable<Movie | undefined> {
-    return this.afs.collection<Movie>(this.collectionName).doc(id).valueChanges();
-  }
+  
 }

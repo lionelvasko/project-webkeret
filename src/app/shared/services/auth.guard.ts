@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from './auth.service'; // adjust the path to match the location of your auth.service.ts file
+import { AuthService } from './auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,private snackBar: MatSnackBar) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -19,7 +20,9 @@ export class AuthGuard implements CanActivate {
         return true;
       } else {
         // Redirect to login page
-        alert('You need to be logged in to access this page');
+        this.snackBar.open('You need to be logged in to access this page', 'Close', {
+          duration: 5000,
+        });
         return this.router.createUrlTree(['/login']);
       }
     }));
