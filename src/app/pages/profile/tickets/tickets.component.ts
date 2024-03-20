@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Ticket } from '../../../shared/models/Ticket';
 import { getAuth } from 'firebase/auth';
 import { TicketsService } from '../../../shared/services/tickets.service';
+import { Observable, map } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-tickets',
@@ -10,19 +12,24 @@ import { TicketsService } from '../../../shared/services/tickets.service';
 })
 export class TicketsComponent {
   auth = getAuth();
-  tickets: Ticket[] = [];
   userid: string | undefined;
-  constructor(private ticketService: TicketsService) {
-    this.userid = this.auth.currentUser?.uid; // Add null check
+  cards: Observable<any> | undefined;
+  constructor(private ticketService: TicketsService, private breakpointObserver: BreakpointObserver) {
+    this.userid = this.auth.currentUser?.uid;
   }
+
+  tickets: string[] = [];
+  ticketsWithInfo: Ticket[] = [];
 
   ngOnInit() {
     if(this.userid) {
-      this.ticketService.getTickets(this.userid).subscribe((tickets) => {
-        this.tickets = tickets;
-        console.log(this.tickets);
+      this.ticketService.getTickets(this.userid).then((data: string[] | null) => {
+        this.tickets = data || [];
+        const ticketInfoPromises = this.tickets.map(ticket => this.ticketService.getTicketInfo(ticket));
+        Promise.all(ticketInfoPromises).then((ticketsInfo: Ticket[]) => {
+          this.ticketsWithInfo = ticketsInfo;
+        });
       });
     }
   }
-
 }

@@ -1,8 +1,7 @@
 <div class="container">
-    <div class="ticket">
-        <span class="ticket__title">Ticket #1</span>
-        <span class="ticket_movie"> Movie: Movie #1</span>
-        <span class="ticket__date">Date: 2020-01-01</span>
-        <span class="ticket__count">Count: 2</span>
+    <div class="ticket" *ngFor=" let reservedTicket of ticketsWithInfo">
+        <span class="ticket__title">Movie: {{ reservedTicket.movie }}</span>
+        <span class="ticket__date">Date: {{ reservedTicket.date}}</span>
+        <span class="ticket__seats">Reserved seats: {{ reservedTicket.seats }}</span>
     </div>
 </div>

@@ -1,7 +1,6 @@
 export interface Ticket{
-    id: number;
     movie: string;
-    date: string;
-    count: number;
+    date: Date;
+    seats: number;
     
 }
