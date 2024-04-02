@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, doc, getDoc, deleteDoc} from '@angular/fire/firestore';
-import { setDoc } from 'firebase/firestore';
+import { addDoc, collection, setDoc } from 'firebase/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,15 @@ export class StorageService {
       console.log('No such document!');
       return null;
     }
+  }
+
+  async addMovie(name: string, duration: string, picture: string, releaseDate: String){
+    await addDoc(collection(this.firestore, 'movies'), {
+      name: name,
+      duration: duration,
+      picture: picture,
+      releaseDate: releaseDate
+    });
   }
 
 }
