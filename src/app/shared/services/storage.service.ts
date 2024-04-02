@@ -15,7 +15,8 @@ export class StorageService {
       password: password,
       name: name,
       phone: phone,
-      address: address
+      address: address,
+      admin: false
     });
   }
 
@@ -34,7 +35,7 @@ export class StorageService {
     }
   }
 
-async updateCurrentUser(userID: string ,name: string, email: string, phone: string, address: string) {
+  async updateCurrentUser(userID: string ,name: string, email: string, phone: string, address: string) {
     const docRef = doc(this.firestore, 'users', userID);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -46,6 +47,16 @@ async updateCurrentUser(userID: string ,name: string, email: string, phone: stri
       address: address !== '' ? address : userData['address']
       };
       await setDoc(docRef, updatedData);
+    }
+  }
+
+  async isAdmin(userID: string) {
+    const docSnap = await getDoc(doc(this.firestore, 'users', userID));
+    if (docSnap.exists()) {
+      return docSnap.data()['admin'];
+    } else {
+      console.log('No such document!');
+      return null;
     }
   }
 

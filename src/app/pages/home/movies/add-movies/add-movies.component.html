@@ -1,0 +1,23 @@
+<form>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div>
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" name="duration" pattern="[0-9]+" required placeholder="The duration of the movie in minutes">
+    </div>
+    
+    <div>
+        <label for="picture">Picture:</label>
+        <input type="file" id="picture" name="picture" accept="image/*" required>
+    </div>
+    
+    <div>
+        <label for="releaseDate">Release Date:</label>
+        <input type="date" id="releaseDate" name="releaseDate" required>
+    </div>
+    
+    <button type="submit">Submit</button>
+</form>

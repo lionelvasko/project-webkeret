@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import { Show } from '../../../shared/models/Show';
+import { Observable } from 'rxjs';
+import { ShowsService } from '../../../shared/services/shows.service';
 
 @Component({
   selector: 'app-shows-dashboard',
@@ -8,26 +11,26 @@ import { map } from 'rxjs/operators';
   styleUrl: './shows-dashboard.component.scss'
 })
 export class ShowsDashboardComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+  shows: Show[] = [];
+  cards: Observable<any> | undefined;
 
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
+  constructor(private showService: ShowsService, private breakpointObserver: BreakpointObserver) { }
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+  ngOnInit() {
+    this.showService.loadShows().subscribe(shows => {
+      this.shows = shows;
+      this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+        map(({ matches }) => {
+          if (matches) {
+            return this.shows.map((show, index) => {
+              return {cols: 2, rows: 1, time: show.datetime, title: show.movie, seats: show.seats};
+            });
+          }
+          return this.shows.map((show, index) => {
+            return {cols: 1, rows: 1, time: show.datetime, title: show.movie, seats: show.seats};
+          });
+        })
+      );
+    });
+  }
 }
