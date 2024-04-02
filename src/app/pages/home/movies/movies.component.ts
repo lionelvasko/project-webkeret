@@ -22,6 +22,7 @@ export class MoviesComponent {
   auths = getAuth();
   currentuser: any;
 
+
   constructor(private moviesService: MoviesService, private breakpointObserver: BreakpointObserver, private storage: StorageService, private auth: AngularFireAuth) { 
     this.auth.authState.subscribe(user => {
       if (user) {
@@ -40,14 +41,18 @@ export class MoviesComponent {
         map(({ matches }) => {
           if (matches) {
             return this.movies.map((movie, index) => {
-              return {cols: 5, rows: 1, picture: movie.picture, title: movie.name};
+              return {id: movie.id, cols: 5, rows: 1, picture: movie.picture, title: movie.name, };
             });
           }
           return this.movies.map((movie, index) => {
-            return {cols: 1, rows: 1, picture: movie.picture,title: movie.name};
+            return {id: movie.id, cols: 1, rows: 1, picture: movie.picture, title: movie.name};
           });
         })
       );
     });
+  }
+
+  deleteCard(card: any) {
+    this.moviesService.deleteMovie(card.id);
   }
 }
