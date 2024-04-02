@@ -28,7 +28,6 @@ export class MoviesComponent {
         this.currentuser = user;
         this.storage.isAdmin(this.currentuser.uid).then((data: any) => {
           this.isAdmin = data;
-          console.log('isAdmin: ', this.isAdmin);
         });
       }
     });
