@@ -16,12 +16,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatTabsModule} from '@angular/material/tabs';
+import { SeatsComponent } from './seats/seats.component';
+import { ShowsService } from '../../shared/services/shows.service';
 
 @NgModule({
   declarations: [
     ShowsComponent,
     ShowsDashboardComponent,
-    AdressComponent
+    AdressComponent,
+    SeatsComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatRadioModule,
     ReactiveFormsModule,
     MatTabsModule
+  ],
+  providers: [
+    ShowsService
   ]
 })
 export class ShowsModule { }

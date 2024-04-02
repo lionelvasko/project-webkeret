@@ -13,6 +13,7 @@ import { ShowsService } from '../../../shared/services/shows.service';
 export class ShowsDashboardComponent {
   shows: Show[] = [];
   cards: Observable<any> | undefined;
+  selectedShow: Show | undefined;
 
   constructor(private showService: ShowsService, private breakpointObserver: BreakpointObserver) { }
 
@@ -23,7 +24,7 @@ export class ShowsDashboardComponent {
         map(({ matches }) => {
           if (matches) {
             return this.shows.map((show, index) => {
-              return {cols: 2, rows: 1, time: show.datetime, title: show.movie, seats: show.seats};
+              return {cols: 2, rows: 1, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
             });
           }
           return this.shows.map((show, index) => {
@@ -32,5 +33,9 @@ export class ShowsDashboardComponent {
         })
       );
     });
+  }
+  
+  selectShow(show: Show) {
+    this.showService.setSelectedShow(show);
   }
 }

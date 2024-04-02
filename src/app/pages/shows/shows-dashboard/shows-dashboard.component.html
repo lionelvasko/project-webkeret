@@ -1,24 +1,19 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    @for (card of cards | async; track card) {
+  <mat-grid-list cols="3" rowHeight="100px">
+    <ng-container *ngFor="let card of cards | async">
       <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
         <mat-card class="dashboard-card">
           <mat-card-header>
             <mat-card-title>
-              {{card.title}}
-              <mat-radio-button style="margin-left: auto;" class="example-margin" value="after">Select</mat-radio-button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>Expand</button>
-              </mat-menu>
+              <mat-radio-button (click)="selectShow(card)">{{card.title}}</mat-radio-button>
             </mat-card-title>
+            <mat-card-content style="padding-top: 10px;">
+              {{card.time}}
+            </mat-card-content>
           </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <span>{{card.seats}}</span>
-            <span>{{card.time}}</span>
-          </mat-card-content>
         </mat-card>
       </mat-grid-tile>
-    }
+    </ng-container>
   </mat-grid-list>
 </div>

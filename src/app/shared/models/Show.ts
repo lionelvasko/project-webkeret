@@ -1,5 +1,5 @@
 export interface Show {
-    id: string;
+    id?: any;
     seats: Array<boolean>;
     movie: string;
     datetime: Date;
