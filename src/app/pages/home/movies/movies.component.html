@@ -3,7 +3,7 @@
   <mat-grid-list cols="5" rowHeight="350px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card" style="background-image: url('{{card.picture}}'); background-size: cover; width: 100%; background-position: center;">
-        <button mat-icon-button class="delete-button" (click)="deleteCard(card)">
+        <button mat-icon-button class="delete-button" (click)="deleteCard(card)" *ngIf="isAdmin">
           <mat-icon>delete</mat-icon>
         </button>
         <mat-card-content>
