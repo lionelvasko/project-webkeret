@@ -9,7 +9,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AdressComponent } from './adress/adress.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -23,7 +22,6 @@ import { ShowsService } from '../../shared/services/shows.service';
   declarations: [
     ShowsComponent,
     ShowsDashboardComponent,
-    AdressComponent,
     SeatsComponent
   ],
   imports: [

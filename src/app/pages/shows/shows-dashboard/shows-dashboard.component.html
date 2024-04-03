@@ -1,6 +1,6 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="3" rowHeight="100px">
+  <mat-grid-list cols="2" rowHeight="100px">
     <ng-container *ngFor="let card of cards | async">
       <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
         <mat-card class="dashboard-card">
@@ -8,7 +8,7 @@
             <mat-card-title>
               <mat-radio-button (click)="selectShow(card)">{{card.title}}</mat-radio-button>
             </mat-card-title>
-            <mat-card-content style="padding-top: 10px;">
+            <mat-card-content style="padding-top: 10px">
               {{card.time}}
             </mat-card-content>
           </mat-card-header>

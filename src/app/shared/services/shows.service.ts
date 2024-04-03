@@ -26,11 +26,35 @@ export class ShowsService {
 
   private selectedShow = new BehaviorSubject<Show | null>(null);
 
-setSelectedShow(show: Show) {
-  this.selectedShow.next(show);
-}
+  setSelectedShow(show: Show) {
+    this.selectedShow.next(show);
+  }
 
-getSelectedShow() {
-  return this.selectedShow.asObservable();
-}
+  getSelectedShow() {
+    return this.selectedShow.asObservable();
+  }
+
+  removeSelectedShows(showID: string){
+    this.afs.collection(this.collectionName).doc(showID).delete();
+  }
+
+  updateShow(showID: string, selectedSeats: number[]){
+    const docRef = this.afs.collection(this.collectionName).doc(showID);
+    console.log(showID)
+  
+    docRef.get().toPromise().then((doc) => {
+      if (doc && doc.exists) {
+        const showData = doc.data() as Show;
+        const updatedSeats = showData.seats.map((seat, index) => {
+          return selectedSeats.includes(index) ? true : seat;
+        });
+  
+        docRef.update({seats: updatedSeats});
+      } else {
+        console.log("No such document!");
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+  }
 }

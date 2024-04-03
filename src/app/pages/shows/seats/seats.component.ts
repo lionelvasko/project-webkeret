@@ -38,4 +38,5 @@ export class SeatsComponent implements OnInit{
   isSelected(index: number) {
     return this.selectedSeatIndexArray.includes(index);
   }
+  book(){}
 }

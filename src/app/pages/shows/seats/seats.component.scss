@@ -3,20 +3,27 @@
     flex-wrap: wrap;
     flex-wrap: wrap;
     margin: auto;
-    width: 1000px;
-  }
+    width: 70%;
+}
   
-  .seat {
-    width: 100px;
-    height: 100px;
-    background-color: #4a4a4a;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    margin: 5px;
-    color: rgb(255, 170, 0);
-    text-align: center;
-    user-select: none;
-  }
-  .seat.selected {
-    background-color: orange !important;
-  }
+.seat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: #4a4a4a;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin: 5px;
+  color: rgb(255, 170, 0);
+  user-select: none;
+}
+
+.seat.selected {
+  background-color: orange !important;
+  color: black;
+}
+.taken {
+  background-color: red !important;
+}
