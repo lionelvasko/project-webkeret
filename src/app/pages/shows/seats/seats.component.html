@@ -1,7 +1,7 @@
 <div *ngIf="!selectedShow; else showDetails">Please select a show!</div>
   
 <ng-template #showDetails>
-  <div *ngFor="let seat of selectedShow?.seats; let i = index" class="seat" (click)="selectSeat(i)">
+  <div *ngFor="let seat of selectedShow?.seats; let i = index" [class.selected]="isSelected(i)"  class="seat" (click)="selectSeat(i)">
     Seat {{i + 1}}
   </div>
 </ng-template>

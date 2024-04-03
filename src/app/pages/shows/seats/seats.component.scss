@@ -15,7 +15,8 @@
     margin: 5px;
     color: rgb(255, 170, 0);
     text-align: center;
+    user-select: none;
   }
   .seat.selected {
-    background-color: orange;
+    background-color: orange !important;
   }
