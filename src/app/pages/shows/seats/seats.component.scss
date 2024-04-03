@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 1000px;
+  }
+  
+  .seat {
+    width: 100px;
+    height: 100px;
+    background-color: #4a4a4a;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin: 5px;
+    color: rgb(255, 170, 0);
+    text-align: center;
+  }
+  .seat.selected {
+    background-color: orange;
+  }

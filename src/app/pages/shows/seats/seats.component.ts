@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowsService } from '../../../shared/services/shows.service';
 import { Show } from '../../../shared/models/Show';
+import { Seat } from '../../../shared/models/Seat';
 
 @Component({
   selector: 'app-seats',
@@ -16,11 +17,12 @@ export class SeatsComponent implements OnInit{
   ngOnInit() {
     this.showsService.getSelectedShow().subscribe(show => {
       this.selectedShow = show;
-      console.log(this.selectedShow?.movie);
     });
   }
 
-  selectSeat(seat: number) {
-    return;
-  }
+  selectedSeatIndexArray: number[] = [];
+
+selectSeat(index: number) {
+  this.selectedSeatIndexArray.push(index);
+}
 }
