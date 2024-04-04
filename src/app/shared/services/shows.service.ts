@@ -78,4 +78,8 @@ export class ShowsService {
       console.log("Error getting document:", error);
     });
   }
+
+  addShow(show: Show){
+    this.afs.collection(this.collectionName).add(show);
+  }
 }

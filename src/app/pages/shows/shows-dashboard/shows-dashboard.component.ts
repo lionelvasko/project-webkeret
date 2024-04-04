@@ -13,8 +13,8 @@ import { StorageService } from '../../../shared/services/storage.service';
   styleUrl: './shows-dashboard.component.scss'
 })
 export class ShowsDashboardComponent {
-deleteCard(_t7: any) {
-  return;
+deleteCard(card: any) {
+    this.showService.removeSelectedShows(card.id);
 }
   shows: Show[] = [];
   cards: Observable<any> | undefined;
