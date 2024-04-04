@@ -28,14 +28,15 @@ export class ShowsDashboardComponent {
             });
           }
           return this.shows.map((show, index) => {
-            return {cols: 1, rows: 1, time: show.datetime, title: show.movie, seats: show.seats};
+            return {cols: 1, rows: 1, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
           });
         })
       );
     });
   }
   
-  selectShow(show: Show) {
-    this.showService.setSelectedShow(show);
+  selectShow(showID: string) {
+    this.showService.setSelectedShow(showID);
+    console.log(showID);
   }
 }

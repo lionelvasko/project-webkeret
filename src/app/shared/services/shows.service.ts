@@ -3,7 +3,7 @@ import { Show } from '../models/Show';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,14 +24,35 @@ export class ShowsService {
     );
   }
 
-  private selectedShow = new BehaviorSubject<Show | null>(null);
+  private selectedShowID = new BehaviorSubject<string | null>(null);
 
-  setSelectedShow(show: Show) {
-    this.selectedShow.next(show);
+  setSelectedShow(showID: string) {
+    this.selectedShowID.next(showID);
   }
 
-  getSelectedShow() {
-    return this.selectedShow.asObservable();
+  getShow(showId: string): Observable<Show | null> {
+    return this.afs.collection(this.collectionName).doc<Show>(showId).snapshotChanges().pipe(
+      map(snapshot => {
+        const data = snapshot.payload.data() as Show;
+        if (data) {
+          return { id: snapshot.payload.id, ...data };
+        } else {
+          return null;
+        }
+      })
+    );
+  }
+
+  getSelectedShow(): Observable<Show | null> {
+    return this.selectedShowID.pipe(
+      switchMap(showId => {
+        if (showId) {
+          return this.getShow(showId);
+        } else {
+          return of(null);
+        }
+      })
+    );
   }
 
   removeSelectedShows(showID: string){
