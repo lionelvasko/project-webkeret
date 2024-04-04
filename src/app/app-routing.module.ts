@@ -5,6 +5,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 const routes: Routes = [
   {path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
   {path: 'home/add-movies', canActivate: [AuthGuard], loadChildren: () => import('./pages/home/movies/add-movies/add-movies.module').then(m => m.AddMoviesModule)},
+  {path: 'shows/add-show', canActivate: [AuthGuard], loadChildren: () => import('./pages/shows/add-show/add-show.module').then(m => m.AddShowModule)},
   {path: 'login', loadChildren:() => import('./pages/login/login.module').then(m => m.LoginModule)},
   {path: 'register', loadChildren:() => import('./pages/register/register.module').then(m => m.RegisterModule)},
   {path: 'shows',canActivate: [AuthGuard], loadChildren:() => import('./pages/shows/shows.module').then(m => m.ShowsModule)},

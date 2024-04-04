@@ -1,19 +1,21 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="100px">
+  <mat-grid-list cols="3" rowHeight="100px">
     <ng-container *ngFor="let card of cards | async">
       <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
         <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
-              <mat-radio-button (click)="selectShow(card.id)">{{card.title}}</mat-radio-button>
-            </mat-card-title>
-            <mat-card-content style="padding-top: 10px">
-              {{card.time}}
-            </mat-card-content>
-          </mat-card-header>
+          <div>
+            <mat-radio-button (click)="selectShow(card.id)"></mat-radio-button>
+            {{card.title}} {{card.time}}
+          </div>
+          <button mat-icon-button class="delete-button" (click)="deleteCard(card)" *ngIf="isAdmin">
+            <mat-icon>delete</mat-icon>
+          </button>
         </mat-card>
       </mat-grid-tile>
     </ng-container>
   </mat-grid-list>
+  <a routerLink="/shows/add-show" *ngIf="isAdmin">
+    <mat-icon class="add-icon">add</mat-icon>
+  </a>
 </div>

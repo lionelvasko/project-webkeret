@@ -1,16 +1,37 @@
 .grid-container {
   margin: 20px;
 }
-
-.dashboard-card {
+.dashboard-card{
   position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
+mat-icon {
+  font-size: 50px;
+  height: auto;
+  width: auto;
+  bottom: 0;
+  position: sticky;
+  color: rgb(255, 153, 0);
+  background-color: rgba(255, 255, 255, 0.589);
+  border-radius: 30px;
+  border: none;
+}
 
-.dashboard-card-content {
-  text-align: center;
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+delete-button{
+  left: 40px;
 }

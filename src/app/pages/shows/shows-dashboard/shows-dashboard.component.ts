@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { Show } from '../../../shared/models/Show';
 import { Observable } from 'rxjs';
 import { ShowsService } from '../../../shared/services/shows.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { StorageService } from '../../../shared/services/storage.service';
 
 @Component({
   selector: 'app-shows-dashboard',
@@ -11,11 +13,25 @@ import { ShowsService } from '../../../shared/services/shows.service';
   styleUrl: './shows-dashboard.component.scss'
 })
 export class ShowsDashboardComponent {
+deleteCard(_t7: any) {
+  return;
+}
   shows: Show[] = [];
   cards: Observable<any> | undefined;
   selectedShow: Show | undefined;
+  currentuser: any;
+  isAdmin: boolean = false;
 
-  constructor(private showService: ShowsService, private breakpointObserver: BreakpointObserver) { }
+  constructor(private showService: ShowsService, private breakpointObserver: BreakpointObserver, private auth: AngularFireAuth, private storage: StorageService) { 
+    this.auth.authState.subscribe(user => {
+      if (user) {
+        this.currentuser = user;
+        this.storage.isAdmin(this.currentuser.uid).then((data: any) => {
+          this.isAdmin = data;
+        });
+      }
+    });
+  }
 
   ngOnInit() {
     this.showService.loadShows().subscribe(shows => {
@@ -24,11 +40,11 @@ export class ShowsDashboardComponent {
         map(({ matches }) => {
           if (matches) {
             return this.shows.map((show, index) => {
-              return {cols: 2, rows: 1, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
+              return {cols: 1, rows: 2, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
             });
           }
           return this.shows.map((show, index) => {
-            return {cols: 1, rows: 1, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
+            return {cols: 1, rows: 2, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
           });
         })
       );

@@ -17,12 +17,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
 import { SeatsComponent } from './seats/seats.component';
 import { ShowsService } from '../../shared/services/shows.service';
+import { AddShowComponent } from './add-show/add-show.component';
 
 @NgModule({
   declarations: [
     ShowsComponent,
     ShowsDashboardComponent,
-    SeatsComponent
+    SeatsComponent,
   ],
   imports: [
     CommonModule,
