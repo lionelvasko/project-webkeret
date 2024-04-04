@@ -1,1 +1,18 @@
-<p>add-show works!</p>
+<form (submit)="upload($event)">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required [formControl]="nameText">
+    </div>
+    
+    <div>
+        <label for="seatsNumber">Seats Number:</label>
+        <input type="number" id="seatsNumber" name="seatsNumber" required [formControl]="seatsNumberText">
+    </div>
+    
+    <div>
+        <label for="releaseDate">Date:</label>
+        <input type="date" id="releaseDate" name="releaseDate" required [formControl]="showDate">
+    </div>
+    
+    <button type="submit">Submit</button>
+</form>

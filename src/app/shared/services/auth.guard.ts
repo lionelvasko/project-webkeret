@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
           this.storage.isAdmin(this.currentuser.uid).then((data: any) => {
             this.isAdmin = data;
             const url: string = state.url;
-            resolve(url === '/home/add-movies' ? this.canActivateAdmin() : this.isUserLoggedIn());
+            resolve((url === '/home/add-movies' || url ==='/shows/add-show') ? this.canActivateAdmin() : this.isUserLoggedIn());
           });
         } else {
           resolve(this.isUserLoggedIn());
@@ -50,7 +50,7 @@ export class AuthGuard implements CanActivate {
     } else {
       // Redirect to login page
       this.snackBar.open('You need to be logged in to access this page', 'Close', {
-        duration: 5000,
+        duration: 1000,
       });
       this.router.navigate(['/login']);
       return false;
@@ -66,7 +66,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       this.snackBar.open('You need to be an admin to access this page', 'Close', {
-        duration: 5000,
+        duration: 1000,
       });
       this.router.navigate(['/home']);
       console.log(this.isAdmin)
