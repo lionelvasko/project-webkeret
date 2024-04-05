@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="ticket" *ngFor=" let reservedTicket of ticketsWithInfo">
+    <div class="ticket" *ngFor=" let reservedTicket of tickets">
         <span class="ticket__title">Movie: {{ reservedTicket.movie }}</span>
         <span class="ticket__date">Date: {{ reservedTicket.date}}</span>
         <span class="ticket__seats">Reserved seats: {{ reservedTicket.seats }}</span>

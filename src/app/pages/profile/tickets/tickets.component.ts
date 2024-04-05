@@ -18,17 +18,12 @@ export class TicketsComponent {
     this.userid = this.auth.currentUser?.uid;
   }
 
-  tickets: string[] = [];
-  ticketsWithInfo: Ticket[] = [];
+  tickets: Ticket[] = [];
 
   ngOnInit() {
     if(this.userid) {
-      this.ticketService.getTickets(this.userid).then((data: string[] | null) => {
-        this.tickets = data || [];
-        const ticketInfoPromises = this.tickets.map(ticket => this.ticketService.getTicketInfo(ticket));
-        Promise.all(ticketInfoPromises).then((ticketsInfo: Ticket[]) => {
-          this.ticketsWithInfo = ticketsInfo;
-        });
+      this.ticketService.getTickets(this.userid).then((ticket: Ticket[] | null) => {
+        this.tickets = ticket || [];
       });
     }
   }

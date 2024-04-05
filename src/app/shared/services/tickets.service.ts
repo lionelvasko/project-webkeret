@@ -16,20 +16,20 @@ export class TicketsService {
 
   collectionName = 'tickets';
 
-  constructor(private http: HttpClient, private afs: AngularFirestore, private storage: AngularFireStorage, private firestore: Firestore, private showservice: ShowsService) { }
+  constructor(private firestore: Firestore, private showservice: ShowsService) { }
 
-  async getTickets(userID: string) {
-    const docSnap = await getDoc(doc(this.firestore, 'users', userID));
-    if (docSnap.exists()) {
-      return docSnap.data()["tickets"] as string[];
-    } else {
-      console.log('No such document!');
-      return null;
+  async getTickets(userID: string): Promise<Ticket[] | null> {
+    const userRef = doc(this.firestore, 'users', userID);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists() && userSnap.data() && userSnap.data()['tickets']) {
+      return userSnap.data()['tickets'].map((ticket: any) => ({
+        movie: ticket.movie,
+        seats: ticket.seats,
+        date: ticket.date
+      }));
     }
-  }
-  async getTicketInfo(ticketID: string): Promise<Ticket>{
-    return (await getDoc(doc(this.firestore, 'tickets', ticketID))).data() as Ticket;
-  }
+    return null;
+}
 
   async addTicket(userID: string, showID: string, seats: number[]){
     const userRef = doc(this.firestore, 'users', userID);
@@ -53,4 +53,6 @@ export class TicketsService {
       }
     });
   }
+
+
 }
