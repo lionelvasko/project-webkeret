@@ -33,17 +33,24 @@ export class TicketsService {
 
   async addTicket(userID: string, showID: string, seats: number[]){
     const userRef = doc(this.firestore, 'users', userID);
-    const ticketData = { showID, seats };
   
-    const userSnap = await getDoc(userRef);
-    let currentTickets = [];
+    this.showservice.getShow(showID).subscribe(async (show_movie) => {
+      if (show_movie) {
+        const movie = show_movie.movie;
+        const date = show_movie.datetime;
+        const ticketData = { movie, seats, date };
   
-    if (userSnap.exists() && userSnap.data() && userSnap.data()['tickets']) {
-      currentTickets = userSnap.data()['tickets'];
-    }
+        const userSnap = await getDoc(userRef);
+        let currentTickets = [];
   
-    currentTickets.push(ticketData);
+        if (userSnap.exists() && userSnap.data() && userSnap.data()['tickets']) {
+          currentTickets = userSnap.data()['tickets'];
+        }
   
-    await updateDoc(userRef, { tickets: currentTickets });
+        currentTickets.push(ticketData);
+  
+        await updateDoc(userRef, { tickets: currentTickets });
+      }
+    });
   }
 }
