@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { BehaviorSubject, Observable, map, of, switchMap } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -61,13 +62,13 @@ export class ShowsService {
 
   updateShow(showID: string, selectedSeats: number[]){
     const docRef = this.afs.collection(this.collectionName).doc(showID);
-    console.log(showID)
+    console.log(selectedSeats)
   
     docRef.get().toPromise().then((doc) => {
       if (doc && doc.exists) {
         const showData = doc.data() as Show;
         const updatedSeats = showData.seats.map((seat, index) => {
-          return selectedSeats.includes(index) ? true : seat;
+          return selectedSeats.includes(index) ? false : seat;
         });
   
         docRef.update({seats: updatedSeats});
@@ -82,4 +83,6 @@ export class ShowsService {
   addShow(show: Show){
     this.afs.collection(this.collectionName).add(show);
   }
+
+  
 }

@@ -9,5 +9,6 @@
      (click)="seat && selectSeat(i)">
   {{selectedShow && selectedShow.seats[i] ? 'Seat ' + (i+1) : 'Taken'}}
 </div>
+
 <button (click)="book()">Book</button>
 </ng-template>
