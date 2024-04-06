@@ -3,7 +3,8 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { StorageService } from '../../../../shared/services/storage.service';
 import { FormControl } from '@angular/forms';
 import { finalize } from 'rxjs';
-import e from 'express';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-movies',
@@ -17,7 +18,7 @@ export class AddMoviesComponent {
   releaseDateText=new FormControl('');
   filepathText: string = '';
 
-  constructor(private storage: AngularFireStorage,  private myStorage: StorageService) {}
+  constructor(private storage: AngularFireStorage,  private myStorage: StorageService, private router: Router) {}
 
   uploadPicture(event: any) {
     const file = event.target.files[0];
@@ -54,7 +55,8 @@ export class AddMoviesComponent {
     }
 
     this.myStorage.addMovie(this.nameText?.value ?? '', this.durationNumber?.value ?? '', this.filepathText ?? '', this.releaseDateText?.value ?? '');
-
+    alert('Movie added successfully!')
+    this.router.navigate(['/']);
   }
 
 }
