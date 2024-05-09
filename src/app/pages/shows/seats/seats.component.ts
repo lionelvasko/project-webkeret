@@ -47,13 +47,19 @@ export class SeatsComponent implements OnInit{
     return this.selectedSeatIndexArray.includes(index);
   }
   book(){
-    if (this.selectedShow) {
-      this.showsService.updateShow(this.selectedShow.id, this.selectedSeats);
-      this.ticketservice.addTicket(this.currentUser.uid, this.selectedShow.id, this.selectedSeats);
-      alert('Seats booked successfully');
-      this.router.navigate(['/']);
-    } else {
-      console.error('selectedShow is null');
+    if(this.auth.currentUser){
+      if (this.selectedShow) {
+        this.showsService.updateShow(this.selectedShow.id, this.selectedSeats);
+        this.ticketservice.addTicket(this.currentUser.uid, this.selectedShow.id, this.selectedSeats);
+        alert('Seats booked successfully');
+        this.router.navigate(['/']);
+      } else {
+        console.error('selectedShow is null');
+      }
+    }
+    else{
+      alert('Please login to book tickets');
+      this.router.navigate(['/login']);
     }
   }
 }

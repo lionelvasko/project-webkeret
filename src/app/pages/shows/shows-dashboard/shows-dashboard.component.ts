@@ -38,13 +38,10 @@ deleteCard(card: any) {
       this.shows = shows;
       this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
         map(({ matches }) => {
-          if (matches) {
-            return this.shows.map((show, index) => {
-              return {cols: 1, rows: 2, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
-            });
-          }
           return this.shows.map((show, index) => {
-            return {cols: 1, rows: 2, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
+            const date = show.datetime.toDate();
+            const formattedDate = date.toISOString().split('T')[0];
+            return {cols: 1, rows: 2, time: formattedDate, title: show.movie, seats: show.seats, id: show.id};
           });
         })
       );
