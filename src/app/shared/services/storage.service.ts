@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, doc, getDoc, deleteDoc} from '@angular/fire/firestore';
 import { Timestamp, addDoc, collection, setDoc } from 'firebase/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { tick } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,9 @@ export class StorageService {
       name: name !== '' ? name : userData['name'],
       email: email !== '' ? email : userData['email'],
       phone: phone !== '' ? phone : userData['phone'],
-      address: address !== '' ? address : userData['address']
+      address: address !== '' ? address : userData['address'],
+      tickets : userData['tickets'],
+      admin: userData['admin']
       };
       await setDoc(docRef, updatedData);
     }
