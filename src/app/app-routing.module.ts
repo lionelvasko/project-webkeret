@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: 'shows/add-show', canActivate: [AuthGuard], loadChildren: () => import('./pages/shows/add-show/add-show.module').then(m => m.AddShowModule)},
   {path: 'login', loadChildren:() => import('./pages/login/login.module').then(m => m.LoginModule)},
   {path: 'register', loadChildren:() => import('./pages/register/register.module').then(m => m.RegisterModule)},
-  {path: 'shows',canActivate: [AuthGuard], loadChildren:() => import('./pages/shows/shows.module').then(m => m.ShowsModule)},
+  {path: 'shows', loadChildren:() => import('./pages/shows/shows.module').then(m => m.ShowsModule)},
   {path: 'profile',canActivate: [AuthGuard], loadChildren:() => import('./pages/profile/profile.module').then(m => m.ProfileModule)},
   {path: 'not-found', loadChildren:() => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)},
   {path: 'login/forgot-pswd', loadChildren: () => import('./pages/login/forgot-pswd/forgot-pswd.module').then(m => m.ForgotPswdModule) },
