@@ -39,9 +39,7 @@ deleteCard(card: any) {
       this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
         map(({ matches }) => {
           return this.shows.map((show, index) => {
-            const date = show.datetime.toDate();
-            const formattedDate = date.toISOString().split('T')[0];
-            return {cols: 1, rows: 2, time: formattedDate, title: show.movie, seats: show.seats, id: show.id};
+            return {cols: 1, rows: 2, time: show.datetime, title: show.movie, seats: show.seats, id: show.id};
           });
         })
       );

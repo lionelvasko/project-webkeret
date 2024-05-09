@@ -6,7 +6,9 @@
         <mat-card class="dashboard-card">
           <div>
             <mat-radio-button (click)="selectShow(card.id)"></mat-radio-button>
-            {{card.title}} {{card.time}}
+            {{card.title}}
+            <br>
+            {{card.time | timestamp}}
           </div>
           <button mat-icon-button class="delete-button" (click)="deleteCard(card)" *ngIf="isAdmin">
             <mat-icon>delete</mat-icon>
