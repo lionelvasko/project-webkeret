@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, doc, getDoc, deleteDoc} from '@angular/fire/firestore';
-import { addDoc, collection, setDoc } from 'firebase/firestore';
+import { Timestamp, addDoc, collection, setDoc } from 'firebase/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
@@ -61,7 +61,7 @@ export class StorageService {
     }
   }
 
-  async addMovie(name: string, duration: string, picture: string, releaseDate: String){
+  async addMovie(name: string, duration: number, picture: string, releaseDate: Timestamp){
     await addDoc(collection(this.firestore, 'movies'), {
       name: name,
       duration: duration,

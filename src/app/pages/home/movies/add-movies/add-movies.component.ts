@@ -4,6 +4,7 @@ import { StorageService } from '../../../../shared/services/storage.service';
 import { FormControl } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
+import { Timestamp } from 'firebase/firestore';
 
 
 @Component({
@@ -45,16 +46,18 @@ export class AddMoviesComponent {
   upload(event: Event) {
     event.preventDefault();
     const name = this.nameText?.value;
-    const duration = this.durationNumber?.value;
-    const releaseDate = this.releaseDateText?.value;
+    const duration = Number(this.durationNumber?.value);
     const filepath = this.filepathText;
-
-    if (name === '' || duration === '' || releaseDate === '' || filepath === '') {
+  
+    if (name === '' || isNaN(duration) || this.releaseDateText?.value === null || filepath === '') {
       alert('Minden mezőt ki kell tölteni!');
       return;
     }
-
-    this.myStorage.addMovie(this.nameText?.value ?? '', this.durationNumber?.value ?? '', this.filepathText ?? '', this.releaseDateText?.value ?? '');
+  
+    const releaseDateInSeconds = new Date(this.releaseDateText?.value ?? '').getTime() / 1000;
+    const releaseDate = new Timestamp(releaseDateInSeconds, 0);
+  
+    this.myStorage.addMovie(this.nameText?.value ?? '', duration, this.filepathText ?? '', releaseDate);
     alert('Movie added successfully!')
     this.router.navigate(['/']);
   }
