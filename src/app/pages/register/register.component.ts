@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
             alert(`Email address already in use.`)
             break;
           case 'auth/invalid-email':
-            console.log(`Email address ${emailValue} is invalid.`);
+            alert(`Email address ${emailValue} is invalid.`);
             break;
           case 'auth/operation-not-allowed':
             alert('Error during sign up.');
