@@ -41,10 +41,15 @@ export class RegisterComponent implements OnInit, OnDestroy{
 
     const emailValue = this.email.value || '';
     const passwordValue = this.password.value || '';
-    const confirmPasswordValue = this.password.value || '';
+    const confirmPasswordValue = this.confirmPassword.value || '';
     const nameValue = this.name.value || '';
     const phoneValue = this.phone.value || '';
     const addressValue = this.address.value || '';
+
+    if (!emailValue || !passwordValue || !confirmPasswordValue || !nameValue || !phoneValue || !addressValue) {
+      alert('Minden mező kitöltése kötelező!');
+      return;
+    }
 
     if (passwordValue !== confirmPasswordValue) {
       alert('A két jelszó nem egyezik meg!');
@@ -73,7 +78,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
             alert ('Password is not strong enough. Add additional characters including special characters and numbers.');
             break;
           default:
-            console.log(error.message);
+            alert('An error occurred.' + error.message);
             break;
         }
       });
