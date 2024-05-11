@@ -46,5 +46,5 @@ Thumbs.db
 *-debug.log
 .runtimeconfig.json
 
-src\environments\environment.ts
-src\environments\environment.development.ts
+/src\environments\environment.ts
+/rc\environments\environment.development.ts
